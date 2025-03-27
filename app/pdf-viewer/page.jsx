@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { FaArrowLeft, FaDownload } from 'react-icons/fa';
 import Link from 'next/link';
 
-export default function PDFViewerPage() {
+// Create a client component that uses useSearchParams
+function PDFViewerContent() {
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -76,5 +77,18 @@ export default function PDFViewerPage() {
         />
       </main>
     </div>
+  );
+}
+
+// Main component with Suspense boundary
+export default function PDFViewerPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#0a0d20]">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#16f2b3]"></div>
+      </div>
+    }>
+      <PDFViewerContent />
+    </Suspense>
   );
 }
