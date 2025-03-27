@@ -19,7 +19,7 @@ export const projectsData = [
         role: 'Developer',
         code: '',
         demo: '',
-        pdf: '/pdfs/social-media-platform.pdf', // Link to your research paper
+        pdf: '', // Link to your research paper
         tags: ['C', 'Data Structures', 'Algorithms'],
         image: { src: '/png/social-media.jpg' },
     },
@@ -31,7 +31,7 @@ export const projectsData = [
         code: '',
         role: 'Quantitative Analyst',
         demo: '',
-        pdf: '/pdfs/trading-algorithm.pdf', // Link to your research paper
+        pdf: '', // Link to your research paper
         tags: ['Python', 'Machine Learning', 'Finance'],
         image: { src: '/png/trading-algo.jpg' },
     },
@@ -46,9 +46,32 @@ export const projectsData = [
         pdf: '/pdfs/road-damage-detection.pdf', // Link to your research paper
         tags: ['Computer Vision', 'React', 'Azure'],
         image: { src: '/png/road-damage.jpg' },
+    },
+    {
+        id: 5,
+        name: 'Automated Pharmaceutical Solution Dispenser',
+        description: "Fabricated an autonomous solution dispenser capable of producing concentrations with ±0.1 M accuracy, using SolidWorks and Arduino programming.",
+        tools: ['Arduino', 'SolidWorks'],
+        code: '',
+        demo: '',
+        role: 'Team Lead',
+        pdf: '/pdfs/solution-disp.pdf', // Link to your research paper
+        tags: ['Arduino', 'SolidWorks'],
+        image: { src: '/png/solution-disp.jpg' },
+    },
+    {
+        id: 6,
+        name: 'Baja SAE Brake Pedal',
+        description: "Designed and tested a brake pedal for the Queen's University Baja Racing Team using SolidWorks and topology optimization, achieving a FoS of 3.5 and mass of 0.1816 kg.",
+        tools: ['SolidWorks', 'Topology Optimization'],
+        code: '',
+        demo: '',
+        role: 'Team Lead',
+        pdf: '/pdfs/brake-pedal.pdf', // Link to your research paper
+        tags: ['SolidWorks', 'Topology Optimization'],
+        image: { src: '/png/brake-pedal.jpeg' },
     }
-];
-
+]
 
 // Do not remove any property.
 // Leave it blank instead as shown below
