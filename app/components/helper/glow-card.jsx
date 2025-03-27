@@ -1,11 +1,16 @@
 "use client"
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const GlowCard = ({ children , identifier}) => {
+const GlowCard = ({ children, identifier }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
-    // Only run this code on the client side
-    if (typeof window === 'undefined') return;
+    // Set isMounted to true when component mounts on the client
+    setIsMounted(true);
+    
+    // Skip the effect during SSR
+    if (!isMounted) return;
     
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`);
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`);
@@ -72,7 +77,7 @@ const GlowCard = ({ children , identifier}) => {
     return () => {
       document.body.removeEventListener('pointermove', UPDATE);
     };
-  }, [identifier]);
+  }, [identifier, isMounted]); // Add isMounted to the dependency array
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>
