@@ -1,11 +1,30 @@
+"use client"
+
+import { useEffect, useRef } from 'react';
 import { projectsData } from '@/utils/data/projects-data';
 import SingleProject from './single-project';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Projects = () => {
+  const projectsRef = useRef(null);
+  
+  // Check for scrollToProjects flag when component mounts
+  useEffect(() => {
+    const shouldScroll = sessionStorage.getItem('scrollToProjects') === 'true';
+    if (shouldScroll && projectsRef.current) {
+      // Clear the flag
+      sessionStorage.removeItem('scrollToProjects');
+      
+      // Scroll to projects section with a slight delay to ensure page is fully loaded
+      setTimeout(() => {
+        projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }, []);
+  
   return (
-    <div id='projects' className="relative z-50 my-12 lg:my-24">
+    <div id="projects" ref={projectsRef} className="relative z-50 my-12 lg:my-24">
       {/* Background gradient */}
       <div className="w-[200px] h-[200px] bg-purple-300/20 rounded-full absolute top-10 right-1/4 filter blur-[100px] opacity-30"></div>
       <div className="w-[150px] h-[150px] bg-blue-300/20 rounded-full absolute bottom-10 left-1/4 filter blur-[100px] opacity-20"></div>

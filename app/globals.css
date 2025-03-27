@@ -10,7 +10,7 @@
   animation: fadeIn 0.3s ease-out forwards;
 }
 
-/* Project card modern styles with smaller fixed sizes */
+/* Project card styles */
 .project-card {
   border-radius: 8px;
   overflow: hidden;
@@ -36,16 +36,16 @@
   border-color: rgba(139, 92, 246, 0.25); /* More subtle border color */
 }
 
+/* Project card scrollbar hiding */
+.project-card::-webkit-scrollbar {
+  display: none;
+}
+
 /* Fixed height for the card content area */
 .h-card-body {
   height: calc(300px - 27px); /* Adjusted for new card height */
   display: flex;
   flex-direction: column;
-}
-
-/* Project card scrollbar hiding */
-.project-card::-webkit-scrollbar {
-  display: none;
 }
 
 /* Fixed height containers - updated to ensure consistency */
@@ -242,4 +242,45 @@
   width: 100%;
   height: 40px;
   align-items: center;
+}
+
+/* Add PDF viewer isolation styles */
+.pdf-viewer-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+}
+
+/* Additional styles for the PDF viewer backdrop */
+.pdf-viewer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 999;
+  overflow: hidden;
+}
+
+/* PDF viewer styles */
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+/* Ensure iframe doesn't have borders */
+iframe {
+  border: none;
+  display: block; /* Remove potential inline gap */
+}
+
+/* PDF viewer fixes */
+.pdf-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999; /* Super high z-index to ensure it's above everything */
+  isolation: isolate; /* Create a new stacking context */
 }
