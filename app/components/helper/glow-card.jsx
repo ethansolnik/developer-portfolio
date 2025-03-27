@@ -43,14 +43,20 @@ const GlowCard = ({ children, identifier }) => {
     card.style.setProperty('--active', CONFIG.opacity);
     card.style.setProperty('--start', 0);
 
+    // Using a safer approach for pointer events
     const handlePointerMove = (event) => {
+      // Skip if no event data
+      if (!event || typeof event.clientX !== 'number') return;
+      
+      const x = event.clientX;
+      const y = event.clientY;
       const cardBounds = card.getBoundingClientRect();
 
       if (
-        event.x > cardBounds.left - CONFIG.proximity &&
-        event.x < cardBounds.left + cardBounds.width + CONFIG.proximity &&
-        event.y > cardBounds.top - CONFIG.proximity &&
-        event.y < cardBounds.top + cardBounds.height + CONFIG.proximity
+        x > cardBounds.left - CONFIG.proximity &&
+        x < cardBounds.left + cardBounds.width + CONFIG.proximity &&
+        y > cardBounds.top - CONFIG.proximity &&
+        y < cardBounds.top + cardBounds.height + CONFIG.proximity
       ) {
         card.style.setProperty('--active', 1);
       } else {
@@ -63,7 +69,7 @@ const GlowCard = ({ children, identifier }) => {
       ];
 
       let angle =
-        (Math.atan2(event.y - cardCenter[1], event.x - cardCenter[0]) * 180) /
+        (Math.atan2(y - cardCenter[1], x - cardCenter[0]) * 180) /
         Math.PI;
 
       angle = angle < 0 ? angle + 360 : angle;
@@ -71,13 +77,15 @@ const GlowCard = ({ children, identifier }) => {
       card.style.setProperty('--start', angle + 90);
     };
 
-    document.body.addEventListener('pointermove', handlePointerMove);
+    // Using a safer event type
+    window.addEventListener('mousemove', handlePointerMove);
 
     return () => {
-      document.body.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('mousemove', handlePointerMove);
     };
   }, [isClient, identifier]);
 
+  // Simple base styling if JavaScript is disabled or not loaded yet
   return (
     <div className={`glow-container-${identifier} glow-container`} ref={containerRef}>
       <article 
